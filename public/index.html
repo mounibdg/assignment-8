@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BSc in Web & Cloud Engineering</title>
+  <link rel="stylesheet" href="/styles.css" />
+  <script src="/app.js" defer></script>
+</head>
+<body>
+  <main class="container">
+    <h1>BSc in Web & Cloud Engineering</h1>
+    <p>
+      Welcome to the Web & Cloud Engineering study programme! In this programme,
+      students learn how to build full-stack web applications, design RESTful APIs,
+      and deploy reliable backend servers from scratch.
+    </p>
+
+    <section class="controls">
+      <h2>Try the API Routes</h2>
+      <div class="button-grid">
+        <button data-url="/api/courses" data-method="GET">GET /api/courses</button>
+        <button data-url="/api/status" data-method="GET">GET /api/status</button>
+        <button data-url="/api/headers" data-method="GET">GET /api/headers</button>
+        <button data-url="/api/subscribe" data-method="POST">POST /api/subscribe</button>
+        <button data-url="/api/admin" data-method="GET">GET /api/admin</button>
+        <button data-url="/api/stats" data-method="GET">GET /api/stats</button>
+        <button data-url="/api/does-not-exist" data-method="GET">GET /api/does-not-exist (404)</button>
+      </div>
+    </section>
+
+    <section class="output">
+      <h2>Server Response</h2>
+      <p><strong>Status Code:</strong> <span id="status-display">Waiting for click...</span></p>
+      <pre id="response-body">Click any button above to call the server.</pre>
+    </section>
+  </main>
+</body>
+</html>
