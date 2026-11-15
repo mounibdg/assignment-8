@@ -9,6 +9,18 @@ const COURSES = [
     { id: 'CS305' , title : 'Modern Javacript & async System' , credits : 5 }       
 ];
 
+let requestsServed = 0;
+
+app.use((req , res , next) => {
+    const timestamp = new Date().toISOString();
+    console.log('[${timestamp}] ${req.method} ${req.url}');
+    next();
+});
+
+app.use((req , res , next) => {
+    requestsServed += 1;
+    next();
+});
 
 app.get('/hello' , (req , res) => {
     res.type('text/plain').send("Hello from Mounib's server!");
@@ -42,6 +54,10 @@ app.post('/api/subscriber' , (req,res) => {
 app.get('/api/admin' , (req,res) => {
     res.status(403).json({error:'Forbidden'});
 })
+
+app.get('/api/stats' , (req , res) => {
+    res.json({requestsServed});
+});
 app.listen(PORT , () => {
     console.log(`Server is running at http://localhost:${PORT}`)
 });
