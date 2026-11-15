@@ -18,7 +18,7 @@ let requestsServed = 0;
 
 app.use((req , res , next) => {
     const timestamp = new Date().toISOString();
-    console.log('[${timestamp}] ${req.method} ${req.url}');
+    console.log(`[${timestamp}] ${req.method} ${req.url}`);
     next();
 });
 
@@ -54,7 +54,7 @@ app.get('/api/headers' , (req , res) => {
         accept: req.get('Accept') || null});
     });
 
-app.post('/api/subscriber' , (req,res) => {
+app.post('/api/subscribe' , (req,res) => {
     res.status(201).json({subscribed : true});
 })
 
