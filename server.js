@@ -1,7 +1,12 @@
 import express from 'express';
+import path from 'path';
+import {fileURLToPath} from 'url';
 
 const app = express();
 const PORT = process.env.PORT || 3000;
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const COURSES = [
     { id: 'CS101' , title : 'Introduction to web programming' , credits: 6},
@@ -21,6 +26,8 @@ app.use((req , res , next) => {
     requestsServed += 1;
     next();
 });
+
+app.use(express.static(path.join(__dirname, 'public')));
 
 app.get('/hello' , (req , res) => {
     res.type('text/plain').send("Hello from Mounib's server!");
@@ -58,6 +65,14 @@ app.get('/api/admin' , (req,res) => {
 app.get('/api/stats' , (req , res) => {
     res.json({requestsServed});
 });
+
+app.use((req , res) => {
+    if (req.path.startsWith('/api')){
+        return res.status(404).json({error : 'Not found'});
+    }
+    res.status(404).type('text/plain').send('404 - Page not found');
+});
+
 app.listen(PORT , () => {
     console.log(`Server is running at http://localhost:${PORT}`)
 });
